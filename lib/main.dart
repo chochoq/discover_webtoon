@@ -1,3 +1,4 @@
+import 'package:discover_webtoon/widgets/Button.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -68,43 +69,17 @@ class App extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.amber, borderRadius: BorderRadius.circular(45)),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 50,
-                          ),
-                          child: Text(
-                            'Transfer',
-                            style: TextStyle(
-                              fontSize: 22,
-                            ),
-                          ),
-                        ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Button(
+                        buttonColor: Colors.amber,
+                        text: 'Transfer',
+                        textColor: Colors.black,
                       ),
-                      const SizedBox(width: 10),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(79, 87, 85, 85),
-                            borderRadius: BorderRadius.circular(45)),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 20,
-                            horizontal: 50,
-                          ),
-                          child: Text(
-                            'Request',
-                            style: TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                      Button(
+                          buttonColor: Color.fromARGB(255, 53, 57, 60),
+                          text: 'Request',
+                          textColor: Colors.white),
                     ],
                   )
                 ],
