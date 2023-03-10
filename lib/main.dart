@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            backgroundColor: Color(0xFF181818),
+            backgroundColor: const Color(0xFF181818),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 80),
+                  const SizedBox(height: 80),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'menu',
                         style: TextStyle(
                           color: Colors.white,
@@ -28,7 +30,7 @@ class App extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
+                          const Text(
                             'Hey, NoName',
                             style: TextStyle(
                               color: Colors.white,
@@ -47,7 +49,7 @@ class App extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 100),
+                  const SizedBox(height: 100),
                   Text(
                     'Total Balance',
                     style: TextStyle(
@@ -55,8 +57,8 @@ class App extends StatelessWidget {
                       fontSize: 22,
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Text(
+                  const SizedBox(height: 5),
+                  const Text(
                     '\$3 233 123',
                     style: TextStyle(
                       color: Colors.white,
@@ -64,13 +66,15 @@ class App extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
+                        decoration: BoxDecoration(
+                            color: Colors.amber, borderRadius: BorderRadius.circular(45)),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
                             vertical: 20,
                             horizontal: 50,
                           ),
@@ -81,12 +85,13 @@ class App extends StatelessWidget {
                             ),
                           ),
                         ),
-                        decoration: BoxDecoration(
-                            color: Colors.amber, borderRadius: BorderRadius.circular(45)),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Container(
-                        child: Padding(
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(79, 87, 85, 85),
+                            borderRadius: BorderRadius.circular(45)),
+                        child: const Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: 20,
                             horizontal: 50,
@@ -99,9 +104,6 @@ class App extends StatelessWidget {
                             ),
                           ),
                         ),
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(79, 87, 85, 85),
-                            borderRadius: BorderRadius.circular(45)),
                       ),
                     ],
                   )
