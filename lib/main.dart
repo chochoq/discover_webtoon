@@ -85,6 +85,7 @@ class App extends StatelessWidget {
                         textOpacity('view all', 18),
                       ],
                     ),
+                    const SizedBox(height: 20),
                     const CurrencyCard(
                       order: 1,
                       name: 'Euro',
@@ -93,7 +94,6 @@ class App extends StatelessWidget {
                       amount: '2 233',
                       isInverted: false,
                     ),
-                    const SizedBox(height: 20),
                     const CurrencyCard(
                       order: 2,
                       name: 'Bitcoin',

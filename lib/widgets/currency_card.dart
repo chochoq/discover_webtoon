@@ -18,10 +18,10 @@ class CurrencyCard extends StatelessWidget {
   final _blackColor = const Color(0xFF1F2123);
   @override
   Widget build(BuildContext context) {
-    double dy = (order! * 2) - 2;
+    double dy = ((order! * 2) - 2) * -10;
 
     return Transform.translate(
-      offset: Offset(0, -dy),
+      offset: Offset(0, dy),
       child: Container(
         clipBehavior: Clip.hardEdge,
         height: 150,
