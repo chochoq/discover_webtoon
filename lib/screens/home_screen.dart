@@ -8,6 +8,7 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+// 리스타트 만들기 리셋아이콘/ 재시작
 
 class _HomeScreenState extends State<HomeScreen> {
   static const twentyFiveMinutes = 1500;
@@ -31,9 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void onResetPressed() {
+    setState(() {
+      totalSeconds = twentyFiveMinutes;
+    });
+    timer.cancel();
+  }
+
   void onPausePressed() {
     timer.cancel();
-
     setState(() {
       isRunning = false;
     });
@@ -75,6 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               )),
+          IconButton(
+            color: Theme.of(context).cardColor,
+            onPressed: onResetPressed,
+            icon: const Icon(Icons.restore),
+            iconSize: 50,
+          ),
           Flexible(
               flex: 3,
               child: Center(
