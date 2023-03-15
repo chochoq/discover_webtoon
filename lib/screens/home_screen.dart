@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Flexible(
-              flex: 1,
+              flex: 2,
               child: Container(
                 alignment: Alignment.bottomCenter,
                 child: Text(
@@ -83,21 +83,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               )),
-          IconButton(
-            color: Theme.of(context).cardColor,
-            onPressed: onResetPressed,
-            icon: const Icon(Icons.restore),
-            iconSize: 50,
-          ),
           Flexible(
-              flex: 3,
+              flex: 2,
               child: Center(
-                child: IconButton(
-                  color: Theme.of(context).cardColor,
-                  onPressed: isRunning ? onPausePressed : onStartPressed,
-                  icon: Icon(
-                      isRunning ? Icons.pause_circle_filled_outlined : Icons.play_circle_outline),
-                  iconSize: 98,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      color: Theme.of(context).cardColor,
+                      onPressed: onResetPressed,
+                      icon: const Icon(Icons.settings_backup_restore_outlined),
+                      iconSize: 85,
+                    ),
+                    IconButton(
+                      color: Theme.of(context).cardColor,
+                      onPressed: isRunning ? onPausePressed : onStartPressed,
+                      icon: Icon(isRunning
+                          ? Icons.pause_circle_filled_outlined
+                          : Icons.play_circle_outline),
+                      iconSize: 80,
+                    ),
+                  ],
                 ),
               )),
           Flexible(
