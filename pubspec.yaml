@@ -32,9 +32,8 @@ dependencies:
     sdk: flutter
 
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +84,17 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+
+  #   - family: Nanum Gothic
+  #     fonts:
+  #       - asset: lib/fonts/NanumGothic_Regular.ttf
+  #   - family: Nanum Gothic bold
+  #     fonts:
+  #       - asset: lib/fonts/NanumGothic-Bold.ttf
+
+      
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
