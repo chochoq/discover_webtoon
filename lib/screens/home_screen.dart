@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
+  final Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,18 @@ class HomeScreen extends StatelessWidget {
           future: webtoons,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const Text('has data');
+              return ListView.separated(
+                itemCount: snapshot.data!.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  print(index);
+                  var webtoons = snapshot.data![index];
+                  return Text(webtoons.title);
+                },
+                separatorBuilder: (context, index) => const SizedBox(width: 20),
+              );
             }
-            return const Text('loading...');
+            return const Center(child: CircularProgressIndicator());
           },
         ));
   }
