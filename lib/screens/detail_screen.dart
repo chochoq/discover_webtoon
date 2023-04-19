@@ -1,3 +1,4 @@
+import 'package:discover_webtoon/widgets/episode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:discover_webtoon/models/webtoon_detail_model.dart';
 import 'package:discover_webtoon/models/webtoon_episode_model.dart';
@@ -108,7 +109,15 @@ class _DetailScreenState extends State<DetailScreen> {
                 future: episodes,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return episodeButton(snapshot);
+                    return Column(
+                      children: [
+                        for (var episode in snapshot.data!)
+                          EpisodeWidget(
+                            episode: episode,
+                            webtoonId: widget.id,
+                          ),
+                      ],
+                    );
                   }
                   return Container();
                 })
@@ -118,32 +127,7 @@ class _DetailScreenState extends State<DetailScreen> {
     );
   }
 
-  Column episodeButton(AsyncSnapshot<List<WebtoonEpisodeModel>> snapshot) {
-    return Column(
-      children: [
-        for (var episode in snapshot.data!)
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-            decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Colors.green),
-                color: Colors.green.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(20)),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  episode.title,
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-                ),
-                const Icon(
-                  Icons.chevron_right,
-                  color: Colors.white,
-                ),
-              ],
-            ),
-          ),
-      ],
-    );
-  }
+  // Column episodeButton(AsyncSnapshot<List<WebtoonEpisodeModel>> snapshot) {
+  //   return
+  // }
 }
