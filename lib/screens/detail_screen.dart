@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:discover_webtoon/models/webtoon_detail_model.dart';
 import 'package:discover_webtoon/models/webtoon_episode_model.dart';
 import 'package:discover_webtoon/services/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailScreen extends StatefulWidget {
   final String title, thumb, id;
@@ -15,6 +16,46 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   late Future<WebtoonDetailModel> webtoon;
   late Future<List<WebtoonEpisodeModel>> episodes;
+  late SharedPreferences prefs;
+
+  bool isLiked = false;
+
+  Future initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+    final likedToons = prefs.getStringList('LikedToons');
+
+    if (likedToons != null) {
+      if (likedToons.contains(widget.id) == true) {
+        setState(() {
+          isLiked = true;
+        });
+      }
+    } else {
+      // 앱 초기 실행시
+      await prefs.setStringList('LikedToons', []);
+    }
+  }
+
+  onHeartTap() async {
+    final likedToons = prefs.getStringList('LikedToons');
+    if (likedToons != null) {
+      print('isLiked눌렀을떄 온태배배배 ---$isLiked');
+      if (isLiked) {
+        print('11111');
+        likedToons.remove(widget.id);
+      } else {
+        print('222');
+        likedToons.add(widget.id);
+      }
+
+      await prefs.setStringList('LikedToons', likedToons);
+      setState(() {
+        isLiked = !isLiked;
+        print('isLiked 눌렀을때 -----$isLiked');
+        print(likedToons);
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -22,6 +63,8 @@ class _DetailScreenState extends State<DetailScreen> {
 
     webtoon = ApiService.getToonById(widget.id);
     episodes = ApiService.getToonEpisodeById(widget.id);
+
+    initPrefs();
   }
 
   @override
@@ -29,6 +72,14 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: isLiked
+                ? const Icon(Icons.favorite_outlined)
+                : const Icon(Icons.favorite_border_outlined),
+            onPressed: () => onHeartTap(),
+          )
+        ],
         backgroundColor: Colors.transparent,
         title: Text(
           widget.title,
