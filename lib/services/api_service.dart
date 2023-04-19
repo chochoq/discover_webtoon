@@ -46,7 +46,7 @@ class ApiService {
     if (response.statusCode == 200) {
       final episodes = jsonDecode(response.body);
       for (var episode in episodes) {
-        episodesInstance.add(WebtoonEpisodeModel.fromJson(episodes));
+        episodesInstance.add(WebtoonEpisodeModel.fromJson(episode));
       }
       return episodesInstance;
     }
