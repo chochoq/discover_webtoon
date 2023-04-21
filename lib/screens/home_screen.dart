@@ -1,4 +1,5 @@
-import 'package:discover_webtoon/models/webtoon_model.dart';
+import 'package:discover_webtoon/models/webtoon_kakao_model.dart';
+import 'package:discover_webtoon/models/webtoon_naver_model.dart';
 import 'package:discover_webtoon/services/api_service.dart';
 import 'package:discover_webtoon/widgets/webtoon_widget.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,10 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
+  final Future<List<WebtoonNaverModel>> webtoonsNaver = ApiService.getTodaysNaverToons();
+  final Future<List<WebtoonKakaoModel>> webtoonsKakao = ApiService.getTodaysKakaoToons('kakao');
+  final Future<List<WebtoonKakaoModel>> webtoonsKakaoPage =
+      ApiService.getTodaysKakaoToons('kakaoPage');
 
   @override
   Widget build(BuildContext context) {
@@ -18,44 +22,87 @@ class HomeScreen extends StatelessWidget {
             '오늘의 웹툰',
             style: TextStyle(
               fontSize: 30,
-              fontFamily: 'Nanum Gothic',
+              fontFamily: 'Pretendard',
               fontWeight: FontWeight.w800,
             ),
           ),
           foregroundColor: Colors.green,
           elevation: 0,
         ),
-        body: FutureBuilder(
-          future: webtoons,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Column(
-                children: [
-                  const SizedBox(height: 50),
-                  Expanded(child: makeList(snapshot)),
-                ],
-              );
-            }
-            return const Center(child: CircularProgressIndicator());
-          },
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              mainNaver(),
+              webtoonKakao(webtoonsKakao),
+              webtoonKakao(webtoonsKakaoPage),
+            ],
+          ),
         ));
   }
 
-  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
-    return ListView.separated(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      itemCount: snapshot.data!.length,
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, index) {
-        var webtoon = snapshot.data![index];
-
-        return Webtoon(
-          title: webtoon.title,
-          thumb: webtoon.thumb,
-          id: webtoon.id,
-        );
+  FutureBuilder<List<WebtoonKakaoModel>> webtoonKakao(Future<List<WebtoonKakaoModel>> webtoon) {
+    return FutureBuilder(
+      future: webtoon,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return makeKakaoList(snapshot);
+        }
+        return const Center(child: CircularProgressIndicator());
       },
-      separatorBuilder: (context, index) => const SizedBox(width: 20),
+    );
+  }
+
+  FutureBuilder<List<WebtoonNaverModel>> mainNaver() {
+    return FutureBuilder(
+      future: webtoonsNaver,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return makeNaverList(snapshot);
+        }
+        return const Center();
+      },
+    );
+  }
+
+  dynamic makeNaverList(snapshot) {
+    return SizedBox(
+      height: 400,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        itemCount: snapshot.data!.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          var webtoon = snapshot.data![index];
+
+          return Webtoon(
+            title: webtoon.title,
+            thumb: webtoon.thumb,
+            id: webtoon.id,
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(width: 20),
+      ),
+    );
+  }
+
+  dynamic makeKakaoList(AsyncSnapshot<List<WebtoonKakaoModel>> snapshot) {
+    return SizedBox(
+      height: 400,
+      child: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        itemCount: snapshot.data!.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          var webtoon = snapshot.data![index];
+
+          return Webtoon(
+            title: webtoon.title,
+            thumb: webtoon.img,
+            id: webtoon.id,
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(width: 20),
+      ),
     );
   }
 }

@@ -2,23 +2,58 @@ import 'dart:convert';
 
 import 'package:discover_webtoon/models/webtoon_detail_model.dart';
 import 'package:discover_webtoon/models/webtoon_episode_model.dart';
-import 'package:discover_webtoon/models/webtoon_model.dart';
+import 'package:discover_webtoon/models/webtoon_kakao_model.dart';
+import 'package:discover_webtoon/models/webtoon_naver_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class ApiService {
-  static String baseUrl = "https://webtoon-crawler.nomadcoders.workers.dev";
+  static String baseNaverUrl = "https://webtoon-crawler.nomadcoders.workers.dev";
+  static String baseKakaoUrl = "https://korea-webtoon-api.herokuapp.com/";
   static String today = "today";
 
-  static Future<List<WebtoonModel>> getTodaysToons() async {
-    List<WebtoonModel> webtoonIstances = [];
-    final url = Uri.parse('$baseUrl/$today');
+  //오늘의 웹툰 네이버
+  static Future<List<WebtoonNaverModel>> getTodaysNaverToons() async {
+    List<WebtoonNaverModel> webtoonIstances = [];
+    final url = Uri.parse('$baseNaverUrl/$today');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final List<dynamic> webtoons = jsonDecode(response.body);
 
       for (var webtoon in webtoons) {
-        webtoonIstances.add(WebtoonModel.fromJson(webtoon));
+        webtoonIstances.add(WebtoonNaverModel.fromJson(webtoon));
+      }
+
+      return webtoonIstances;
+    }
+    throw Error();
+  }
+
+  //오늘의 웹툰 카카오
+  static Future<List<WebtoonKakaoModel>> getTodaysKakaoToons(String service) async {
+    late var now = DateTime.now();
+    String updateDay = '';
+    updateToday() {
+      updateDay = DateFormat('EEEE').format(now).substring(0, 3).toLowerCase();
+    }
+
+    updateToday();
+
+    List<WebtoonKakaoModel> webtoonIstances = [];
+
+    //kakao , kakaoPage
+    final url = Uri.parse('$baseKakaoUrl?service=$service&updateDay=$updateDay');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> webtoons = jsonDecode(response.body)["webtoons"];
+
+      for (var webtoon in webtoons) {
+        if (webtoon["img"].startsWith('//')) {
+          webtoon["img"] = webtoon["img"].replaceRange(0, 2, 'https://');
+        }
+        webtoonIstances.add(WebtoonKakaoModel.fromJson(webtoon));
       }
 
       return webtoonIstances;
@@ -27,7 +62,7 @@ class ApiService {
   }
 
   static Future<WebtoonDetailModel> getToonById(String id) async {
-    final url = Uri.parse('$baseUrl/$id');
+    final url = Uri.parse('$baseKakaoUrl/$id');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -38,7 +73,7 @@ class ApiService {
   }
 
   static Future<List<WebtoonEpisodeModel>> getToonEpisodeById(String id) async {
-    final url = Uri.parse('$baseUrl/$id/episodes');
+    final url = Uri.parse('$baseKakaoUrl/$id/episodes');
     final response = await http.get(url);
 
     List<WebtoonEpisodeModel> episodesInstance = [];
