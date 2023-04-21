@@ -32,6 +32,7 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              const Text('ddd에 업데이트 된 웹툰'),
               mainNaver(),
               webtoonKakao(webtoonsKakao),
               webtoonKakao(webtoonsKakaoPage),
@@ -78,6 +79,7 @@ class HomeScreen extends StatelessWidget {
             title: webtoon.title,
             thumb: webtoon.thumb,
             id: webtoon.id,
+            service: 'naver',
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 20),
@@ -99,6 +101,7 @@ class HomeScreen extends StatelessWidget {
             title: webtoon.title,
             thumb: webtoon.img,
             id: webtoon.id,
+            service: webtoon.service,
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 20),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:discover_webtoon/models/webtoon_detail_kakao_model.dart';
 import 'package:discover_webtoon/models/webtoon_detail_model.dart';
 import 'package:discover_webtoon/models/webtoon_episode_model.dart';
 import 'package:discover_webtoon/models/webtoon_kakao_model.dart';
@@ -9,7 +10,7 @@ import 'package:intl/intl.dart';
 
 class ApiService {
   static String baseNaverUrl = "https://webtoon-crawler.nomadcoders.workers.dev";
-  static String baseKakaoUrl = "https://korea-webtoon-api.herokuapp.com/";
+  static String baseKakaoUrl = "https://korea-webtoon-api.herokuapp.com";
   static String today = "today";
 
   //오늘의 웹툰 네이버
@@ -43,7 +44,7 @@ class ApiService {
     List<WebtoonKakaoModel> webtoonIstances = [];
 
     //kakao , kakaoPage
-    final url = Uri.parse('$baseKakaoUrl?service=$service&updateDay=$updateDay');
+    final url = Uri.parse('$baseKakaoUrl/?service=$service&updateDay=$updateDay');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -62,18 +63,35 @@ class ApiService {
   }
 
   static Future<WebtoonDetailModel> getToonById(String id) async {
-    final url = Uri.parse('$baseKakaoUrl/$id');
+    final url = Uri.parse('$baseNaverUrl/$id');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final webtoon = jsonDecode(response.body);
+      print(webtoon);
       return WebtoonDetailModel.fromJSON(webtoon);
     }
     throw Error();
   }
 
+  static Future<WebtoonDetailKakaoModel> getKakaoToonById(String title) async {
+    Uri url = Uri.parse('$baseKakaoUrl/search?keyword=$title');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final webtoon = jsonDecode(response.body);
+
+      print(webtoon['webtoons'][0]);
+
+      return WebtoonDetailKakaoModel.fromJson(webtoon['webtoons'][0]);
+    }
+    throw Error();
+  }
+
   static Future<List<WebtoonEpisodeModel>> getToonEpisodeById(String id) async {
-    final url = Uri.parse('$baseKakaoUrl/$id/episodes');
+    final url = Uri.parse('$baseNaverUrl/$id/episodes');
+
     final response = await http.get(url);
 
     List<WebtoonEpisodeModel> episodesInstance = [];
