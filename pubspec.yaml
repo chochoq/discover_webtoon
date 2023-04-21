@@ -36,6 +36,9 @@ dependencies:
   http: ^0.13.5
   url_launcher: ^6.1.10
   shared_preferences: ^2.1.0
+  timer_builder: ^2.0.0
+  intl: ^0.18.1
+
 
 
 dev_dependencies:
@@ -89,12 +92,13 @@ flutter:
   #         weight: 700
 
 
-  #   - family: Nanum Gothic
-  #     fonts:
-  #       - asset: lib/fonts/NanumGothic_Regular.ttf
-  #   - family: Nanum Gothic bold
-  #     fonts:
-  #       - asset: lib/fonts/NanumGothic-Bold.ttf
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: fonts/Pretendard-Regular.otf
+        - asset: fonts/Pretendard-Bold.otf
+        - asset: fonts/Pretendard-Medium.otf
+        - asset: fonts/Pretendard-Light.otf
 
       
 
