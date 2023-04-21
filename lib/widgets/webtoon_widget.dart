@@ -53,6 +53,7 @@ class Webtoon extends StatelessWidget {
               title,
               style: const TextStyle(
                 fontSize: 22,
+                fontFamily: 'Pretendard',
                 fontWeight: FontWeight.w600,
               ),
             ),

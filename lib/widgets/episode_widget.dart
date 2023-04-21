@@ -35,7 +35,8 @@ class EpisodeWidget extends StatelessWidget {
           children: [
             Text(
               episode.title,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                  color: Colors.white, fontFamily: 'Pretendard', fontWeight: FontWeight.w600),
             ),
             const Icon(
               Icons.chevron_right,

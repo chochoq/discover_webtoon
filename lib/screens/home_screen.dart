@@ -18,14 +18,19 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: const Text(
-            '오늘의 웹툰',
-            style: TextStyle(
-              fontSize: 30,
-              fontFamily: 'Pretendard',
-              fontWeight: FontWeight.w800,
-            ),
+          title: Row(
+            children: [
+              Image.asset("images/ditoonLogo.jpg", height: 55),
+            ],
           ),
+          // const Text(
+          //   '오늘의 웹툰',
+          //   style: TextStyle(
+          //     fontSize: 30,
+          //     fontFamily: 'Pretendard',
+          //     fontWeight: FontWeight.w800,
+          //   ),
+          // ),
           foregroundColor: Colors.green,
           elevation: 0,
         ),

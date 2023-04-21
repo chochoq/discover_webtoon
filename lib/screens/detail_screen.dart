@@ -143,6 +143,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               '작품소개',
                               style: TextStyle(
                                 fontSize: 15,
+                                fontFamily: 'Pretendard',
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -150,12 +151,14 @@ class _DetailScreenState extends State<DetailScreen> {
                               snapshot.data!.author,
                               style: const TextStyle(
                                 fontSize: 15,
+                                fontFamily: 'Pretendard',
                               ),
                             ),
                             Text(
                               snapshot.data!.url,
                               style: const TextStyle(
                                 fontSize: 15,
+                                fontFamily: 'Pretendard',
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -188,6 +191,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         '작품소개',
                         style: TextStyle(
                           fontSize: 15,
+                          fontFamily: 'Pretendard',
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -195,12 +199,16 @@ class _DetailScreenState extends State<DetailScreen> {
                         snapshot.data!.about,
                         style: const TextStyle(
                           fontSize: 15,
+                          fontFamily: 'Pretendard',
                         ),
                       ),
                       const SizedBox(height: 10),
                       Text(
                         '${snapshot.data!.genre} / ${snapshot.data!.age}',
-                        style: const TextStyle(fontSize: 15),
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontFamily: 'Pretendard',
+                        ),
                       ),
                       const SizedBox(height: 10),
                     ],
