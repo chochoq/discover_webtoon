@@ -46,12 +46,9 @@ class _DetailScreenState extends State<DetailScreen> {
   onHeartTap() async {
     final likedToons = prefs.getStringList('LikedToons');
     if (likedToons != null) {
-      print('isLiked눌렀을떄 온태배배배 ---$isLiked');
       if (isLiked) {
-        print('11111');
         likedToons.remove(widget.webtoonId);
       } else {
-        print('222');
         likedToons.add(widget.webtoonId);
       }
 
