@@ -1,5 +1,6 @@
 import 'package:discover_webtoon/models/webtoon_kakao_model.dart';
 import 'package:discover_webtoon/models/webtoon_naver_model.dart';
+import 'package:discover_webtoon/screens/list_screen.dart';
 import 'package:discover_webtoon/services/api_service.dart';
 import 'package:discover_webtoon/widgets/webtoon_widget.dart';
 import 'package:flutter/material.dart';
@@ -31,37 +32,44 @@ class HomeScreen extends StatelessWidget {
               Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                child: Image.asset("images/ditoonLogo.jpg", height: 55),
+                child: Image.asset("images/ditoonLogo.png", height: 55),
               ),
               Text(
                 "$dayOfWeek에 업데이트 된 웹툰😍",
                 style: const TextStyle(
-                    color: Color.fromARGB(255, 69, 97, 240),
-                    fontSize: 15,
-                    fontFamily: 'Pretendard',
-                    height: 4),
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontFamily: 'Pretendard',
+                  height: 4,
+                ),
               ),
             ],
           ),
           elevation: 0.0,
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              mainNaver(),
-              webtoonKakao(webtoonsKakao),
-              webtoonKakao(webtoonsKakaoPage),
-            ],
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                mainNaver(),
+                const SizedBox(height: 20),
+                webtoonKakao(webtoonsKakaoPage, '카카페 웹툰'),
+                webtoonKakao(webtoonsKakao, '카카오 웹툰'),
+              ],
+            ),
           ),
         ));
   }
 
-  FutureBuilder<List<WebtoonKakaoModel>> webtoonKakao(Future<List<WebtoonKakaoModel>> webtoon) {
+  FutureBuilder<List<WebtoonKakaoModel>> webtoonKakao(
+      Future<List<WebtoonKakaoModel>> webtoon, String txt) {
     return FutureBuilder(
       future: webtoon,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return makeKakaoList(snapshot);
+          return allListButton(context, snapshot, txt, makeKakaoList);
         }
         return const Center(child: CircularProgressIndicator());
       },
@@ -73,10 +81,37 @@ class HomeScreen extends StatelessWidget {
       future: webtoonsNaver,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return makeNaverList(snapshot);
+          return allListButton(context, snapshot, '네이버 웹툰', makeNaverList);
         }
         return const Center();
       },
+    );
+  }
+
+  Column allListButton(BuildContext context, snapshot, String txt, homeList) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              txt,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w600),
+            ),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const ListScreen()));
+                },
+                icon: const Icon(Icons.arrow_forward_ios_outlined))
+          ],
+        ),
+        homeList(snapshot),
+      ],
     );
   }
 
@@ -84,8 +119,7 @@ class HomeScreen extends StatelessWidget {
     return SizedBox(
       height: 350,
       child: ListView.separated(
-        // padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        itemCount: snapshot.data!.length,
+        itemCount: 5,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           var webtoon = snapshot.data![index];
@@ -97,17 +131,16 @@ class HomeScreen extends StatelessWidget {
             service: 'naver',
           );
         },
-        separatorBuilder: (context, index) => const SizedBox(width: 20),
+        separatorBuilder: (context, index) => const SizedBox(width: 5),
       ),
     );
   }
 
   dynamic makeKakaoList(AsyncSnapshot<List<WebtoonKakaoModel>> snapshot) {
     return SizedBox(
-      height: 400,
+      height: 600,
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        itemCount: snapshot.data!.length,
+        itemCount: 5,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           var webtoon = snapshot.data![index];
@@ -119,7 +152,7 @@ class HomeScreen extends StatelessWidget {
             service: webtoon.service,
           );
         },
-        separatorBuilder: (context, index) => const SizedBox(width: 20),
+        separatorBuilder: (context, index) => const SizedBox(width: 5),
       ),
     );
   }
