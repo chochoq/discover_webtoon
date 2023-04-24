@@ -105,7 +105,11 @@ class HomeScreen extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const ListScreen()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListScreen(
+                                txt: txt,
+                              )));
                 },
                 icon: const Icon(Icons.arrow_forward_ios_outlined))
           ],
