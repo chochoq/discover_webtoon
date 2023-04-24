@@ -62,6 +62,7 @@ class ApiService {
     throw Error();
   }
 
+// 상세
   static Future<WebtoonDetailModel> getToonById(String id) async {
     final url = Uri.parse('$baseNaverUrl/$id');
     final response = await http.get(url);
@@ -82,7 +83,7 @@ class ApiService {
     if (response.statusCode == 200) {
       final webtoon = jsonDecode(response.body);
 
-      print(webtoon['webtoons'][0]);
+      // print(webtoon['webtoons'][0]);
 
       return WebtoonDetailKakaoModel.fromJson(webtoon['webtoons'][0]);
     }

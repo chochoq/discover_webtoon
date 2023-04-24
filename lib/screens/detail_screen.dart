@@ -21,8 +21,8 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   late Future<WebtoonDetailModel> webtoon;
-  late Future<WebtoonDetailKakaoModel> webtoonKakao;
   late Future<List<WebtoonEpisodeModel>> episodes;
+  late Future<WebtoonDetailKakaoModel> webtoonKakao;
   late SharedPreferences prefs;
 
   bool isLiked = false;
@@ -55,8 +55,6 @@ class _DetailScreenState extends State<DetailScreen> {
       await prefs.setStringList('LikedToons', likedToons);
       setState(() {
         isLiked = !isLiked;
-        print('isLiked 눌렀을때 -----$isLiked');
-        print(likedToons);
       });
     }
   }
@@ -66,8 +64,8 @@ class _DetailScreenState extends State<DetailScreen> {
     super.initState();
 
     webtoon = ApiService.getToonById(widget.webtoonId);
-    webtoonKakao = ApiService.getKakaoToonById(widget.title);
     episodes = ApiService.getToonEpisodeById(widget.webtoonId);
+    webtoonKakao = ApiService.getKakaoToonById(widget.title);
 
     initPrefs();
   }

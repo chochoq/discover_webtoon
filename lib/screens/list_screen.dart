@@ -69,7 +69,7 @@ class ListScreen extends StatelessWidget {
                                       webtoonId: webtoon.id,
                                       img: webtoon.thumb,
                                       title: webtoon.title,
-                                      service: service)));
+                                      service: serviceName)));
                         },
                         child: Hero(
                           tag: webtoon.id,
