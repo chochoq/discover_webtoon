@@ -27,18 +27,10 @@ class Webtoon extends StatelessWidget {
                 tag: id,
                 child: Container(
                   width: 250,
-                  // clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      if (service == 'kakao')
-                        BoxShadow(
-                          blurRadius: 10,
-                          offset: const Offset(10, 10),
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                    ],
-                  ),
+                  decoration: const BoxDecoration(
+                      // borderRadius: BorderRadius.circular(10),
+                      color: Color(0xfffcf0f0)),
+                  // height: 300,
                   child: Stack(
                     children: [
                       Image.network(
@@ -52,24 +44,23 @@ class Webtoon extends StatelessWidget {
                       ),
                       if (service != 'naver' && service == 'kakaoPage')
                         Positioned(
-                          width: 250,
-                          // height: 15,
-                          bottom: 20,
-                          child: Column(
-                            children: [
-                              Text(
-                                title,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontFamily: 'Pretendard',
-                                  fontWeight: FontWeight.w600,
-                                  overflow: TextOverflow.ellipsis,
+                            width: 250,
+                            // height: 15,
+                            bottom: 20,
+                            child: Column(
+                              children: [
+                                Text(
+                                  title,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontFamily: 'Pretendard',
+                                    fontWeight: FontWeight.w600,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
+                              ],
+                            )),
                     ],
                   ),
                 ),

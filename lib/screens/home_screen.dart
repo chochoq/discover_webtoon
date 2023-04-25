@@ -56,6 +56,7 @@ class HomeScreen extends StatelessWidget {
                 mainNaver(),
                 const SizedBox(height: 20),
                 webtoonKakao(webtoonsKakaoPage, '카카페 웹툰'),
+                const SizedBox(height: 20),
                 webtoonKakao(webtoonsKakao, '카카오 웹툰'),
               ],
             ),
@@ -121,7 +122,7 @@ class HomeScreen extends StatelessWidget {
 
   dynamic makeNaverList(snapshot) {
     return SizedBox(
-      height: 350,
+      height: 330,
       child: ListView.separated(
         itemCount: 5,
         scrollDirection: Axis.horizontal,
@@ -142,7 +143,7 @@ class HomeScreen extends StatelessWidget {
 
   dynamic makeKakaoList(AsyncSnapshot<List<WebtoonKakaoModel>> snapshot) {
     return SizedBox(
-      height: 600,
+      height: 500,
       child: ListView.separated(
         itemCount: 5,
         scrollDirection: Axis.horizontal,

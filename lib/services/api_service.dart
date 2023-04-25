@@ -78,12 +78,13 @@ class ApiService {
   static Future<WebtoonDetailKakaoModel> getKakaoToonById(String title) async {
     Uri url = Uri.parse('$baseKakaoUrl/search?keyword=$title');
 
+    print(url);
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final webtoon = jsonDecode(response.body);
 
-      // print(webtoon['webtoons'][0]);
+      print(webtoon['webtoons'][0]);
 
       return WebtoonDetailKakaoModel.fromJson(webtoon['webtoons'][0]);
     }
