@@ -63,7 +63,7 @@ class ListScreen extends StatelessWidget {
                     separatorBuilder: (context, index) => const SizedBox(height: 15),
                   );
                 }
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(color: Colors.green));
               }),
         ),
       );

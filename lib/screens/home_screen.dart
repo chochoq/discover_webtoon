@@ -55,26 +55,13 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 mainNaver(),
                 const SizedBox(height: 20),
-                webtoonKakao(webtoonsKakaoPage, '카카페 웹툰'),
+                webtoonKakao(webtoonsKakaoPage, '카카오페이지 웹툰'),
                 const SizedBox(height: 20),
                 webtoonKakao(webtoonsKakao, '카카오 웹툰'),
               ],
             ),
           ),
         ));
-  }
-
-  FutureBuilder<List<WebtoonKakaoModel>> webtoonKakao(
-      Future<List<WebtoonKakaoModel>> webtoon, String txt) {
-    return FutureBuilder(
-      future: webtoon,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return allListButton(context, snapshot, txt, makeKakaoList);
-        }
-        return const Center(child: CircularProgressIndicator());
-      },
-    );
   }
 
   FutureBuilder<List<WebtoonNaverModel>> mainNaver() {
@@ -85,6 +72,19 @@ class HomeScreen extends StatelessWidget {
           return allListButton(context, snapshot, '네이버 웹툰', makeNaverList);
         }
         return const Center();
+      },
+    );
+  }
+
+  FutureBuilder<List<WebtoonKakaoModel>> webtoonKakao(
+      Future<List<WebtoonKakaoModel>> webtoon, String txt) {
+    return FutureBuilder(
+      future: webtoon,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return allListButton(context, snapshot, txt, makeKakaoList);
+        }
+        return const Center(child: CircularProgressIndicator(color: Colors.green));
       },
     );
   }
@@ -106,11 +106,7 @@ class HomeScreen extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ListScreen(
-                                txt: txt,
-                              )));
+                      context, MaterialPageRoute(builder: (context) => ListScreen(txt: txt)));
                 },
                 icon: const Icon(Icons.arrow_forward_ios_outlined))
           ],

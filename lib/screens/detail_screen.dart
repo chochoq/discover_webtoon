@@ -75,20 +75,6 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const f30W800TextStyle = TextStyle(
-      fontSize: 30,
-      fontFamily: 'Pretendard',
-      fontWeight: FontWeight.w800,
-    );
-    const f15W800TextStyle = TextStyle(
-      fontSize: 15,
-      fontWeight: FontWeight.w800,
-      fontFamily: 'Pretendard',
-    );
-    const f15TextStyle = TextStyle(
-      fontSize: 15,
-      fontFamily: 'Pretendard',
-    );
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -101,7 +87,7 @@ class _DetailScreenState extends State<DetailScreen> {
           )
         ],
         backgroundColor: Colors.transparent,
-        title: Text(widget.title, style: f30W800TextStyle),
+        title: Text(widget.title, style: TextStyles.f30W800TextStyle),
         foregroundColor: Colors.black87,
         elevation: 0,
       ),
@@ -134,6 +120,54 @@ class _DetailScreenState extends State<DetailScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Column naverDetail() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: FutureBuilder(
+              future: webtoon,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('작품소개', style: TextStyles.f15W800TextStyle),
+                      const SizedBox(height: 10),
+                      Text(snapshot.data!.about, style: TextStyles.f15TextStyle),
+                      const SizedBox(height: 10),
+                      Text('${snapshot.data!.genre} / ${snapshot.data!.age}',
+                          style: TextStyles.f15TextStyle),
+                      const SizedBox(height: 30),
+                    ],
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator(color: Colors.green));
+                }
+              }),
+        ),
+        FutureBuilder(
+            future: episodes,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: [
+                    for (var episode in snapshot.data!.length > 10
+                        ? snapshot.data!.sublist(0, 10)
+                        : snapshot.data!)
+                      EpisodeWidget(
+                        episode: episode,
+                        webtoonId: widget.webtoonId,
+                      ),
+                  ],
+                );
+              }
+              return Container();
+            })
+      ],
     );
   }
 
@@ -181,57 +215,9 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               );
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(color: Colors.green));
             }
           }),
-    );
-  }
-
-  Column naverDetail() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: FutureBuilder(
-              future: webtoon,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('작품소개', style: TextStyles.f15W800TextStyle),
-                      const SizedBox(height: 10),
-                      Text(snapshot.data!.about, style: TextStyles.f15TextStyle),
-                      const SizedBox(height: 10),
-                      Text('${snapshot.data!.genre} / ${snapshot.data!.age}',
-                          style: TextStyles.f15TextStyle),
-                      const SizedBox(height: 30),
-                    ],
-                  );
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              }),
-        ),
-        FutureBuilder(
-            future: episodes,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(
-                  children: [
-                    for (var episode in snapshot.data!.length > 10
-                        ? snapshot.data!.sublist(0, 10)
-                        : snapshot.data!)
-                      EpisodeWidget(
-                        episode: episode,
-                        webtoonId: widget.webtoonId,
-                      ),
-                  ],
-                );
-              }
-              return Container();
-            })
-      ],
     );
   }
 }
