@@ -2,7 +2,7 @@ import 'package:discover_webtoon/models/webtoon_kakao_model.dart';
 import 'package:discover_webtoon/models/webtoon_naver_model.dart';
 import 'package:discover_webtoon/screens/list_screen.dart';
 import 'package:discover_webtoon/services/api_service.dart';
-import 'package:discover_webtoon/widgets/webtoon_widget.dart';
+import 'package:discover_webtoon/widgets/main_thumb_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -128,7 +128,7 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           var webtoon = snapshot.data![index];
 
-          return Webtoon(
+          return MainThumbWidget(
             title: webtoon.title,
             thumb: webtoon.thumb,
             id: webtoon.id,
@@ -149,7 +149,7 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           var webtoon = snapshot.data![index];
 
-          return Webtoon(
+          return MainThumbWidget(
             title: webtoon.title,
             thumb: webtoon.img,
             id: webtoon.id,
