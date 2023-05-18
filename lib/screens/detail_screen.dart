@@ -7,6 +7,8 @@ import 'package:discover_webtoon/services/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../common/text_styles.dart';
+
 class DetailScreen extends StatefulWidget {
   final String title, img, webtoonId, service;
   const DetailScreen(
@@ -73,6 +75,20 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    const f30W800TextStyle = TextStyle(
+      fontSize: 30,
+      fontFamily: 'Pretendard',
+      fontWeight: FontWeight.w800,
+    );
+    const f15W800TextStyle = TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w800,
+      fontFamily: 'Pretendard',
+    );
+    const f15TextStyle = TextStyle(
+      fontSize: 15,
+      fontFamily: 'Pretendard',
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -85,14 +101,7 @@ class _DetailScreenState extends State<DetailScreen> {
           )
         ],
         backgroundColor: Colors.transparent,
-        title: Text(
-          widget.title,
-          style: const TextStyle(
-            fontSize: 30,
-            fontFamily: 'Pretendard',
-            fontWeight: FontWeight.w800,
-          ),
-        ),
+        title: Text(widget.title, style: f30W800TextStyle),
         foregroundColor: Colors.black87,
         elevation: 0,
       ),
@@ -142,20 +151,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   children: [
                     const Text(
                       '작가',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w800,
-                        fontFamily: 'Pretendard',
-                      ),
+                      style: TextStyles.f15W800TextStyle,
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      snapshot.data!.author,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontFamily: 'Pretendard',
-                      ),
-                    ),
+                    Text(snapshot.data!.author, style: TextStyles.f15TextStyle),
                     const Expanded(child: SizedBox(height: 10)),
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
@@ -200,30 +199,12 @@ class _DetailScreenState extends State<DetailScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        '작품소개',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w800,
-                          fontFamily: 'Pretendard',
-                        ),
-                      ),
+                      const Text('작품소개', style: TextStyles.f15W800TextStyle),
                       const SizedBox(height: 10),
-                      Text(
-                        snapshot.data!.about,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'Pretendard',
-                        ),
-                      ),
+                      Text(snapshot.data!.about, style: TextStyles.f15TextStyle),
                       const SizedBox(height: 10),
-                      Text(
-                        '${snapshot.data!.genre} / ${snapshot.data!.age}',
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'Pretendard',
-                        ),
-                      ),
+                      Text('${snapshot.data!.genre} / ${snapshot.data!.age}',
+                          style: TextStyles.f15TextStyle),
                       const SizedBox(height: 30),
                     ],
                   );
@@ -253,8 +234,4 @@ class _DetailScreenState extends State<DetailScreen> {
       ],
     );
   }
-
-  // Column episodeButton(AsyncSnapshot<List<WebtoonEpisodeModel>> snapshot) {
-  //   return
-  // }
 }
