@@ -3,9 +3,16 @@
 
 Nomad coder를 보면서 복습하면서 만들어 본 오늘의 웹툰 리스트
 
-강의에서 제공한 노마드코더에서 제공한 네이버웹툰 API 이외 [korea-webtoon-api](https://github.com/HyeokjaeLee/korea-webtoon-api)에서 가져온 카카오웹툰, 카카오페이지 웹툰 API를 추가했습니다.
+강의에서 제공한 노마드코더에서 제공한 네이버웹툰 API 이외 [korea-webtoon-api](https://github.com/HyeokjaeLee/korea-webtoon-api)에 제공된 카카오웹툰, 카카오페이지 웹툰 API를 추가했습니다.
 
+<!-- # 추가로 넣은 기능
+1. 날짜
+2. 로고 
+3. 새로운 API
+4. 리스트 widget -->
 
+<!-- # 강의에서 배운 것
+# 추가로 기능 넣으면서 배운 것  -->
 ## 코드컨벤션
 |컨벤션이름|설명|
 |--|--|
@@ -42,3 +49,15 @@ Nomad coder를 보면서 복습하면서 만들어 본 오늘의 웹툰 리스�
 
     - list -> detail로 넘어가는 영역을 GestureDetector로 onTap 속성을 줬는데, 빈영역을(이미지나 txt가 없는 곳) 클릭하면 클릭이 안됨. InkWell로 수정하니까 됨
     [Flutter 공식문서(GestureDetector)](https://docs.flutter.dev/ui/advanced/gestures)를 보면 GestureDetector는 모든 유형의 사용자 상호작용을 추적하는데 이 위젯은 따지고보면 버튼이 아니기 때문에 빈 영역을 누른다고 onTap이 되지않는 걸까라고 추측 중
+
+[2023/05/19]
+
+1. 클린코드 연습 -> Magic Number 사용 지양하기
+    - '의미 있는 숫자는 array index 값이더라도 하드코딩 하지않기'라고 해서, ListView안에 들어가는 itemCount 숫자를 변수안에 넣었다.
+    (특정 인덱스 넘버가 왜 쓰였는지 이해하기 어려운 경우가 있기에 지양한다고 한다, 숫자말고도 String도 포함 하드코딩을 하는 부분은 꼭 다시 확인해야한다.)
+    - 사이즈 박스의 size도 반복되는 게 있어서 위젯으로 추가해보았다.
+
+    [참고) 인프런 - 클린코드찍먹](https://www.inflearn.com/course/%ED%81%B4%EB%A6%B0%EC%BD%94%EB%93%9C-%EC%B0%8D%EB%A8%B9/dashboard)
+
+<!-- 3. 앱 아이콘 이미지 변경
+4. 버튼 재미있는 걸로 바꾸고싶은데.. 뭐가있지 -->

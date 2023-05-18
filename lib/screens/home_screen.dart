@@ -15,6 +15,8 @@ class HomeScreen extends StatelessWidget {
   final Future<List<WebtoonKakaoModel>> webtoonsKakaoPage =
       ApiService.getTodaysKakaoToons('kakaoPage');
 
+  int basicListCount = 5;
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('ko_KR', null);
@@ -52,17 +54,19 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             child: Column(
               children: [
-                const SizedBox(height: 20),
+                ListBetweenSizeBox(),
                 mainNaver(),
-                const SizedBox(height: 20),
+                ListBetweenSizeBox(),
                 webtoonKakao(webtoonsKakaoPage, '카카오페이지 웹툰'),
-                const SizedBox(height: 20),
+                ListBetweenSizeBox(),
                 webtoonKakao(webtoonsKakao, '카카오 웹툰'),
               ],
             ),
           ),
         ));
   }
+
+  SizedBox ListBetweenSizeBox() => const SizedBox(height: 20);
 
   FutureBuilder<List<WebtoonNaverModel>> mainNaver() {
     return FutureBuilder(
@@ -123,7 +127,7 @@ class HomeScreen extends StatelessWidget {
     return SizedBox(
       height: 330,
       child: ListView.separated(
-        itemCount: 5,
+        itemCount: basicListCount,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           var webtoon = snapshot.data![index];
@@ -144,7 +148,7 @@ class HomeScreen extends StatelessWidget {
     return SizedBox(
       height: 500,
       child: ListView.separated(
-        itemCount: 5,
+        itemCount: basicListCount,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           var webtoon = snapshot.data![index];
