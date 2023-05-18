@@ -70,8 +70,8 @@ class ListScreen extends StatelessWidget {
     }
   }
 
-  GestureDetector webtoonBox(BuildContext context, webtoon, String serviceEng) {
-    return GestureDetector(
+  Widget webtoonBox(BuildContext context, webtoon, String serviceEng) {
+    return InkWell(
       onTap: () {
         serviceEng == 'naver'
             ? Navigator.push(

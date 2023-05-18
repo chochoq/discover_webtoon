@@ -89,27 +89,30 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Column allListButton(BuildContext context, snapshot, String txt, homeList) {
+  Widget allListButton(BuildContext context, snapshot, String txt, homeList) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              txt,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.w600),
+        InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ListScreen(txt: txt)));
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  txt,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.w600),
+                ),
+                const Icon(Icons.arrow_forward_ios_outlined)
+              ],
             ),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => ListScreen(txt: txt)));
-                },
-                icon: const Icon(Icons.arrow_forward_ios_outlined))
-          ],
+          ),
         ),
         homeList(snapshot),
       ],
