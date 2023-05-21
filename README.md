@@ -131,12 +131,14 @@ class TextStyles {
 
 <img src='https://velog.velcdn.com/images/chocho/post/c0e1ee25-b8c5-4d85-b8b8-4a481bc100aa/image.png' width='60%'>
 
-    - main -> list로 넘어가는 버튼의 공간이 작아서 해당 버튼 영역을 text를 클릭해도 넘어갈수있게 변경
+- main -> list로 넘어가는 버튼의 공간이 작아서 해당 버튼 영역을 text를 클릭해도 넘어갈수있게 변경
 
 <img src='https://velog.velcdn.com/images/chocho/post/5ed8836c-926f-4c00-a308-e12c930fffcd/image.png' width='60%'>
 
-    - list -> detail로 넘어가는 영역을 GestureDetector로 onTap 속성을 줬는데, 빈영역을(이미지나 txt가 없는 곳) 클릭하면 클릭이 안됨. InkWell로 수정하니까 됨
-    [Flutter 공식문서(GestureDetector)](https://docs.flutter.dev/ui/advanced/gestures)를 보면 GestureDetector는 모든 유형의 사용자 상호작용을 추적하는데 이 위젯은 따지고보면 버튼이 아니기 때문에 빈 영역을 누른다고 onTap이 되지않는 걸까라고 추측 중
+  - list -> detail로 넘어가는 영역을 GestureDetector로 onTap 속성을 줬는데, 빈영역을(이미지나 txt가 없는 곳) 클릭하면 클릭이 안됨. InkWell로 수정하니까 됨
+  [Flutter 공식문서(GestureDetector)](https://docs.flutter.dev/ui/advanced/gestures)를 보면 GestureDetector는 모든 유형의 사용자 상호작용을 추적하는데 이 위젯은 따지고보면 버튼이 아니기 때문에 빈 영역을 누른다고 onTap이 되지않는 걸까라고 추측 중
+  +) GestureDetector에서 ```behavior: HitTestBehavior.translucent``` 혹은 ```behavior: HitTestBehavior.opaque```속성을 사용하면 터치범위를 늘릴 수 있다고 한다.
+  InkWell과 GestureDetector 문서을 꼼꼼히 읽어봐야겟다.
 
 [2023/05/19]
 
