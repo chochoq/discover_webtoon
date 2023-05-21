@@ -44,10 +44,12 @@ Nomad coder를 보면서 복습하면서 만들어 본 오늘의 웹툰 리스�
 
 2. AppBar
 
-<img src='https://velog.velcdn.com/images/chocho/post/5a1433f1-477c-4cef-bf33-f6f70c6633f3/image.png' width='80%'>
 
-<img src='https://velog.velcdn.com/images/chocho/post/27daf3c8-bc67-40ce-b439-608a0f26f806/image.jpg' width='50%'>
-<img src='https://velog.velcdn.com/images/chocho/post/a070a715-1799-45df-bef6-5f4b096f9243/image.PNG' width='50%'>
+|<img src='https://velog.velcdn.com/images/chocho/post/5a1433f1-477c-4cef-bf33-f6f70c6633f3/image.png' width='80%'>| |
+|--|--|
+|<img src='https://velog.velcdn.com/images/chocho/post/27daf3c8-bc67-40ce-b439-608a0f26f806/image.jpg' width='50%'>|<img src='https://velog.velcdn.com/images/chocho/post/a070a715-1799-45df-bef6-5f4b096f9243/image.PNG' width='50%'>|
+
+
 
 - 로고는 로고샵을 이용해서 만들었다. 로고 만드는 여러가지 사이트를 찾아다녔는데 원하는 대로 만들기가 생각보다 어려웠다. 디스커버리 웹툰을 축약해서 제목을 지었는데 글씨가 꽤 귀여웠다.
 
