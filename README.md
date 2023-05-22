@@ -5,6 +5,9 @@ Nomad coder를 보면서 복습하면서 만들어 본 오늘의 웹툰 리스�
 
 강의에서 제공한 노마드코더에서 제공한 네이버웹툰 API 이외 [korea-webtoon-api](https://github.com/HyeokjaeLee/korea-webtoon-api)에 제공된 카카오웹툰, 카카오페이지 웹툰 API를 추가했습니다.
 
+![](https://velog.velcdn.com/images/chocho/post/2413e016-ecb0-4cfb-907a-3610a5125121/image.gif)
+
+
 <!-- # 추가로 넣은 기능
 1. 날짜
 2. 로고 
@@ -13,8 +16,10 @@ Nomad coder를 보면서 복습하면서 만들어 본 오늘의 웹툰 리스�
 
 <!-- # 강의에서 배운 것
 # 추가로 기능 넣으면서 배운 것  -->
-## 코드컨벤션
-|컨벤션이름|설명|
+
+---
+## git comment convention
+|name|description|
 |--|--|
 |Add|코드 추가|
 |Edit|코드 수정|
@@ -28,8 +33,6 @@ Nomad coder를 보면서 복습하면서 만들어 본 오늘의 웹툰 리스�
 |Rename|파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우|
 |Remove|파일을 삭제하는 작업만 수행한 경우|
 
-
-> Gitmoji를 써볼까 싶은데 과연 잘 써질지 모르겟다.
 
 
 ---
