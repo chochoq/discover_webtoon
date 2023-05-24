@@ -17,6 +17,10 @@ class HomeScreen extends StatelessWidget {
 
   int basicListCount = 5;
 
+  final String naverService = '네이버 웹툰';
+  final String kakaoPageService = '카카오페이지 웹툰';
+  final String kakaoService = '카카오 웹툰';
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('ko_KR', null);
@@ -57,9 +61,9 @@ class HomeScreen extends StatelessWidget {
                 ListBetweenSizeBox(),
                 mainNaver(),
                 ListBetweenSizeBox(),
-                webtoonKakao(webtoonsKakaoPage, '카카오페이지 웹툰'),
+                webtoonKakao(webtoonsKakaoPage, kakaoPageService),
                 ListBetweenSizeBox(),
-                webtoonKakao(webtoonsKakao, '카카오 웹툰'),
+                webtoonKakao(webtoonsKakao, kakaoService),
               ],
             ),
           ),
@@ -73,7 +77,7 @@ class HomeScreen extends StatelessWidget {
       future: webtoonsNaver,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return allListButton(context, snapshot, '네이버 웹툰', makeNaverList);
+          return allListButton(context, snapshot, naverService, makeNaverList);
         }
         return const Center();
       },

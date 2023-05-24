@@ -47,6 +47,7 @@ class ApiService {
     final url = Uri.parse('$baseKakaoUrl/?service=$service&updateDay=$updateDay');
     final response = await http.get(url);
 
+    print(url);
     if (response.statusCode == 200) {
       final List<dynamic> webtoons = jsonDecode(response.body)["webtoons"];
 

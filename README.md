@@ -38,6 +38,17 @@ Nomad coder를 보면서 복습하면서 만들어 본 오늘의 웹툰 리스�
 
 ---
 
+# Dependencies
+
+- http
+- url_launcher
+- shared_preferences
+- timer_builder
+- intl
+- carousel_slider
+
+
+---
 ## 추가한 기능들
 
 1. API 추가 사용
@@ -154,6 +165,48 @@ class TextStyles {
     - 사이즈 박스의 size도 반복되는 게 있어서 위젯으로 추가해보았다.
 
     [참고) 인프런 - 클린코드찍먹](https://www.inflearn.com/course/%ED%81%B4%EB%A6%B0%EC%BD%94%EB%93%9C-%EC%B0%8D%EB%A8%B9/dashboard)
+
+
+[2023/05/25]
+
+1. 디버깅 && 리팩토링
+
+변경전
+```
+    if (service == '네이버 웹툰') {
+      webtoonApi = webtoonsNaver;
+      serviceEng = 'naver';
+    } else if (service == '카카페 웹툰') {
+      webtoonApi = webtoonsKakaoPage;
+      serviceEng = 'kakaoPage';
+    } else {
+      webtoonApi = webtoonsKakao;
+      serviceEng = 'kakao';
+    } 
+```
+  이런식으로 사용하고 있던 코드에서 '카카페 웹툰'을 '카카오페이지 웹툰'으로 변경함으로써 문제가 생긴 것을 뒤늦게 확인했다.
+  비교하는 값을 변수로 넣어 주기로 합의. 비교하는 값을 바꾸고싶은데 쉽게 생각나지않는다. 
+
+  변경후
+```
+  final String naverService = '네이버 웹툰';
+  final String kakaoPageService = '카카오페이지 웹툰';
+  final String kakaoService = '카카오 웹툰';
+
+
+    if (service == naverService) {
+      webtoonApi = webtoonsNaver;
+      serviceEng = 'naver';
+    } else if (service == kakaoPageService) {
+      webtoonApi = webtoonsKakaoPage;
+      serviceEng = 'kakaoPage';
+    } else {
+      webtoonApi = webtoonsKakao;
+      serviceEng = 'kakao';
+    }
+
+
+```
 
 
 

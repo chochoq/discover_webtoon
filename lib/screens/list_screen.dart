@@ -14,6 +14,10 @@ class ListScreen extends StatelessWidget {
   final Future<List<WebtoonKakaoModel>> webtoonsKakaoPage =
       ApiService.getTodaysKakaoToons('kakaoPage');
 
+  final String naverService = '네이버 웹툰';
+  final String kakaoPageService = '카카오페이지 웹툰';
+  final String kakaoService = '카카오 웹툰';
+
   @override
   Widget build(BuildContext context) {
     String service = txt;
@@ -21,10 +25,10 @@ class ListScreen extends StatelessWidget {
     late String serviceEng = '';
     late Future webtoonApi;
 
-    if (service == '네이버 웹툰') {
+    if (service == naverService) {
       webtoonApi = webtoonsNaver;
       serviceEng = 'naver';
-    } else if (service == '카카페 웹툰') {
+    } else if (service == kakaoPageService) {
       webtoonApi = webtoonsKakaoPage;
       serviceEng = 'kakaoPage';
     } else {
