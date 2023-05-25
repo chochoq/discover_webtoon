@@ -9,31 +9,36 @@ class ListScreen extends StatelessWidget {
   final String txt;
   ListScreen({super.key, required this.txt});
 
-  final Future<List<WebtoonNaverModel>> webtoonsNaver = ApiService.getTodaysNaverToons();
-  final Future<List<WebtoonKakaoModel>> webtoonsKakao = ApiService.getTodaysKakaoToons('kakao');
-  final Future<List<WebtoonKakaoModel>> webtoonsKakaoPage =
-      ApiService.getTodaysKakaoToons('kakaoPage');
+  final List<String> servicesNameKr = ['네이버 웹툰', '카카오페이지 웹툰', '카카오 웹툰'];
+  final List<String> servicesNameEng = ['naver', 'kakaoPage', 'kakao'];
 
-  final String naverService = '네이버 웹툰';
-  final String kakaoPageService = '카카오페이지 웹툰';
-  final String kakaoService = '카카오 웹툰';
+  final Future<List<WebtoonNaverModel>> webtoonsNaver = ApiService.getTodaysNaverToons();
+  late Future<List<WebtoonKakaoModel>> webtoonsKakao;
+  late Future<List<WebtoonKakaoModel>> webtoonsKakaoPage;
+
+  void initializeWebtoons() {
+    webtoonsKakaoPage = ApiService.getTodaysKakaoToons(servicesNameEng[1]);
+    webtoonsKakao = ApiService.getTodaysKakaoToons(servicesNameEng[2]);
+  }
 
   @override
   Widget build(BuildContext context) {
+    initializeWebtoons();
+
     String service = txt;
 
     late String serviceEng = '';
     late Future webtoonApi;
 
-    if (service == naverService) {
+    if (service == servicesNameKr[0]) {
       webtoonApi = webtoonsNaver;
-      serviceEng = 'naver';
-    } else if (service == kakaoPageService) {
+      serviceEng = servicesNameEng[0];
+    } else if (service == servicesNameKr[1]) {
       webtoonApi = webtoonsKakaoPage;
-      serviceEng = 'kakaoPage';
+      serviceEng = servicesNameEng[1];
     } else {
       webtoonApi = webtoonsKakao;
-      serviceEng = 'kakao';
+      serviceEng = servicesNameEng[2];
     }
 
     {
@@ -77,7 +82,7 @@ class ListScreen extends StatelessWidget {
   Widget webtoonBox(BuildContext context, webtoon, String serviceEng) {
     return InkWell(
       onTap: () {
-        serviceEng == 'naver'
+        serviceEng == servicesNameEng[0]
             ? Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -106,7 +111,7 @@ class ListScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10), color: const Color(0xfffcf0f0)),
               padding: const EdgeInsets.only(left: 10, right: 6),
               child: Image.network(
-                serviceEng == 'naver' ? webtoon.thumb : webtoon.img,
+                serviceEng == servicesNameEng[0] ? webtoon.thumb : webtoon.img,
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter,
                 headers: const {

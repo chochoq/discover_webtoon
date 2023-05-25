@@ -10,19 +10,23 @@ import 'package:intl/intl.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
+  final List<String> servicesNameKr = ['네이버 웹툰', '카카오페이지 웹툰', '카카오 웹툰'];
+  final List<String> servicesNameEng = ['naver', 'kakaoPage', 'kakao'];
+
   final Future<List<WebtoonNaverModel>> webtoonsNaver = ApiService.getTodaysNaverToons();
-  final Future<List<WebtoonKakaoModel>> webtoonsKakao = ApiService.getTodaysKakaoToons('kakao');
-  final Future<List<WebtoonKakaoModel>> webtoonsKakaoPage =
-      ApiService.getTodaysKakaoToons('kakaoPage');
+  late Future<List<WebtoonKakaoModel>> webtoonsKakaoPage;
+  late Future<List<WebtoonKakaoModel>> webtoonsKakao;
+
+  void initializeWebtoons() {
+    webtoonsKakaoPage = ApiService.getTodaysKakaoToons(servicesNameEng[1]);
+    webtoonsKakao = ApiService.getTodaysKakaoToons(servicesNameEng[2]);
+  }
 
   int basicListCount = 5;
 
-  final String naverService = '네이버 웹툰';
-  final String kakaoPageService = '카카오페이지 웹툰';
-  final String kakaoService = '카카오 웹툰';
-
   @override
   Widget build(BuildContext context) {
+    initializeWebtoons();
     initializeDateFormatting('ko_KR', null);
 
     DateTime now = DateTime.now();
@@ -61,9 +65,9 @@ class HomeScreen extends StatelessWidget {
                 ListBetweenSizeBox(),
                 mainNaver(),
                 ListBetweenSizeBox(),
-                webtoonKakao(webtoonsKakaoPage, kakaoPageService),
+                webtoonKakao(webtoonsKakaoPage, servicesNameKr[1]),
                 ListBetweenSizeBox(),
-                webtoonKakao(webtoonsKakao, kakaoService),
+                webtoonKakao(webtoonsKakao, servicesNameKr[2]),
               ],
             ),
           ),
@@ -77,7 +81,7 @@ class HomeScreen extends StatelessWidget {
       future: webtoonsNaver,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return allListButton(context, snapshot, naverService, makeNaverList);
+          return allListButton(context, snapshot, servicesNameKr[0], makeNaverList);
         }
         return const Center();
       },
@@ -140,7 +144,7 @@ class HomeScreen extends StatelessWidget {
             title: webtoon.title,
             thumb: webtoon.thumb,
             id: webtoon.id,
-            service: 'naver',
+            service: servicesNameEng[0],
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 5),

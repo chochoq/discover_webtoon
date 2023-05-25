@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../common/text_styles.dart';
+import '../models/webtoon_kakao_model.dart';
+import '../models/webtoon_naver_model.dart';
 
 class DetailScreen extends StatefulWidget {
   final String title, img, webtoonId, service;
@@ -62,9 +64,19 @@ class _DetailScreenState extends State<DetailScreen> {
     }
   }
 
+  final List<String> servicesNameKr = ['네이버 웹툰', '카카오페이지 웹툰', '카카오 웹툰'];
+  final List<String> servicesNameEng = ['naver', 'kakaoPage', 'kakao'];
+
+  final Future<List<WebtoonNaverModel>> webtoonsNaver = ApiService.getTodaysNaverToons();
+  late Future<List<WebtoonKakaoModel>> webtoonsKakaoPage;
+  late Future<List<WebtoonKakaoModel>> webtoonsKakao;
+
   @override
   void initState() {
     super.initState();
+
+    webtoonsKakaoPage = ApiService.getTodaysKakaoToons(servicesNameEng[1]);
+    webtoonsKakao = ApiService.getTodaysKakaoToons(servicesNameEng[2]);
 
     webtoon = ApiService.getToonById(widget.webtoonId);
     episodes = ApiService.getToonEpisodeById(widget.webtoonId);
@@ -115,8 +127,9 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
             ),
             const SizedBox(height: 30),
-            if (widget.service == 'naver') naverDetail(),
-            if (widget.service == 'kakao' || widget.service == 'kakaoPage') kakaoDetail(),
+            if (widget.service == servicesNameEng[0]) naverDetail(),
+            if (widget.service == servicesNameEng[2] || widget.service == servicesNameEng[1])
+              kakaoDetail(),
           ],
         ),
       ),
